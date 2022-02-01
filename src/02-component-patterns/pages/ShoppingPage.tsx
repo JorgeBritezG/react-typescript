@@ -6,7 +6,7 @@ const product = {
   img: './coffee-mug.png'
 }
 
-export const ShoppingPage = () => {
+   export const ShoppingPage = () => {
   return (
     <div>
       <h1>Shopping Store</h1>
