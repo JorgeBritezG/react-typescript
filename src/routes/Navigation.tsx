@@ -1,38 +1,46 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route, NavLink } from 'react-router-dom';
-
-import { LazyPage2, LazyPage3 } from '../01-lazyload/pages';
-import { ShoppingPage } from '../02-component-patterns/pages/ShoppingPage';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from 'react-router-dom';
 
 import logo from '../logo.svg';
+import { ShoppingPage } from '../02-component-patterns/pages/ShoppingPage';
 
-export const Navigation = () => (
+export const Navigation = () => {
+  return (
+    <Router>
+      <div className="main-layout">
+        <nav>
+            <img src={ logo } alt="React Logo" />
+          <ul>
+            <li>
+              <NavLink to="/" activeClassName="nav-active" exact>Shopping</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" activeClassName="nav-active" exact>About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/users" activeClassName="nav-active" exact>Users</NavLink>
+            </li>
+          </ul>
+        </nav>
 
-  <BrowserRouter>
-    <div className="main-layout">
-      <nav>
-        <img src={logo} alt="React Logo" />
-        <ul>
-          <li>
-            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-active' : ''}>Shopping Page</NavLink>
-          </li>
-          <li>
-            <NavLink to="/lazy2" className={({ isActive }) => isActive ? 'nav-active' : ''}>Lazy 2</NavLink>
-          </li>
-          <li>
-            <NavLink to="/lazy3" className={({ isActive }) => isActive ? 'nav-active' : ''}>Lazy 3</NavLink>
-          </li>
-        </ul>
-      </nav>
-
-
-      <Routes>
-        <Route path="/" element={ <ShoppingPage /> } />
-        <Route path="lazy2" element={ <LazyPage2 /> } />
-        <Route path="lazy3" element={ <LazyPage3 /> } />
-
-      </Routes>
-
-    </div>
-  </BrowserRouter>
-)
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <h1>About</h1>
+          </Route>
+          <Route path="/users">
+            <h1>Users</h1>
+          </Route>
+          <Route path="/">
+            <ShoppingPage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
