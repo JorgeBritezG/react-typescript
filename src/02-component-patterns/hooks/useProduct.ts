@@ -13,7 +13,6 @@ export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) =
 
     const increaseBy = ( value: number ) => {
         const newValue = Math.max( counter + value, 0 );
-
         setCounter( newValue );
 
         onChange && onChange( { count: newValue, product } );
@@ -21,8 +20,7 @@ export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) =
 
     useEffect(() => {
       setCounter( value );
-    }, [value])
-    
+    }, [value]);
 
     return {
         counter,
